@@ -29,14 +29,14 @@ pipeline {
                 }
             }
         }
-        stage('Sonar') {
+                stage('Sonar') {
             steps {
-                timeout(time: 4, unit: 'MINUTES'){
-	                    withSonarQubeEnv('sonarqube') {
-	                sh "mvn clean verify sonar:sonar -Pcoverage -f SysAlmacen/pom.xml"
-	            }
-	        }
-	    }
+                timeout(time: 4, unit: 'MINUTES') {
+                    withSonarQubeEnv('sonarqube') {
+                        sh "mvn clean verify sonar:sonar -Pcoverage -f SysAlmacen/pom.xml"
+                    }
+                }
+            }
         }
         stage('Quality gate') {
             steps {
