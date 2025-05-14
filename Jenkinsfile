@@ -46,8 +46,9 @@ pipeline {
             steps {
                 timeout(time: 4, unit: 'MINUTES') {
                     script {
-                        // Espera el resultado del análisis desde SonarQube
+                        echo "Esperando resultado del Quality Gate desde SonarQube..."
                         def qualityGate = waitForQualityGate()
+                        echo "Estado del Quality Gate: ${qualityGate.status}"
                         if (qualityGate.status != 'OK') {
                             error "Falló la puerta de calidad: ${qualityGate.status}"
                         }
@@ -55,7 +56,6 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy') {
             steps {
                 timeout(time: 8, unit: 'MINUTES') {
