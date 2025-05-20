@@ -59,7 +59,11 @@ public class MarcaController {
         CustomResponse operacion= marcaService.delete(id);
         return ResponseEntity.ok(operacion);
     }
-
+    @GetMapping("/buscarmaxid")
+    public ResponseEntity<Long> getMarcaMaxId() {
+        Long idMax = marcaService.periodoIdMax();
+        return ResponseEntity.ok(idMax);
+    }
     /*@GetMapping("/hateoas/{id}")
     public EntityModel<MarcaDTO> findByIdHateoas(@PathVariable("id") Long id) {
         EntityModel<MarcaDTO> resource = EntityModel.of(mapperUtil.map(service.findById(id), PatientDTO.class));
